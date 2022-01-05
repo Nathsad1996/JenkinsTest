@@ -30,3 +30,12 @@ app.post('/multiply', async (req, res) => {
 app.listen(5000, () => {
     console.log(`server listen at http://localhost:5000`)
 })
+
+// properly close the app when closing signal received
+gracefulShutdown = () => {
+    console.log("I'm Shutting down")
+}
+
+process.on('SIGINT', gracefulShutdown);
+process.on('SIGTERM', gracefulShutdown);
+process.on('SIGUSR2', gracefulShutdown); // Sent by nodemon
